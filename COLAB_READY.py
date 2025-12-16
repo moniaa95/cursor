@@ -28,29 +28,30 @@ from google.colab import userdata
 # KONFIGURACJA
 # ============================================================
 
-PROJECT_NAME = "baza_zabiegow_v0"
-BASE_DIR = f"/content/{PROJECT_NAME}"
+# @title 🔧 Konfiguracja projektu
+PROJECT_NAME = "baza_zabiegow_v0"  # @param {type:"string"}
+BASE_DIR = f"/content/{PROJECT_NAME}"  # @param {type:"string"}
 os.makedirs(BASE_DIR, exist_ok=True)
 
-# Modele
-MODEL_NAME = "openai/gpt-4.1-mini"
-EMBED_MODEL = "openai/text-embedding-3-small"
+# @title 🤖 Modele przez OpenRouter
+MODEL_NAME = "openai/gpt-4.1-mini"  # @param ["openai/gpt-5.1","openai/gpt-5-mini","openai/gpt-4.1-mini","google/gemini-2.5-flash-preview-09-2025","google/gemini-2.5-flash-lite"]
+EMBED_MODEL = "openai/text-embedding-3-small"  # @param ["openai/text-embedding-3-small","openai/text-embedding-3-large"]
 
-# Limity (możesz zmienić)
-MAX_KEYWORDS = 20
-SERP_TOP_N = 10
-MAX_DOMAINS = 50
-MAX_PAGES_PER_DOMAIN = 12
+# @title 🔢 Limity
+MAX_KEYWORDS = 20  # @param {type:"integer"}
+SERP_TOP_N = 10  # @param {type:"integer"}
+MAX_DOMAINS = 50  # @param {type:"integer"}
+MAX_PAGES_PER_DOMAIN = 12  # @param {type:"integer"}
 
-# Filtry
-MIN_TEXT_LEN = 5
-MAX_TEXT_LEN = 120
-MIN_DOMAIN_COUNT = 2
-SEMANTIC_SIM_THRESHOLD = 0.22
+# @title 🧹 Filtry (ważne: to ogranicza LLM)
+MIN_TEXT_LEN = 5     # @param {type:"integer"}
+MAX_TEXT_LEN = 120   # @param {type:"integer"}
+MIN_DOMAIN_COUNT = 2 # @param {type:"integer"}
+SEMANTIC_SIM_THRESHOLD = 0.22  # @param {type:"slider", min:0.15, max:0.55, step:0.01}
 
-# Jina rerank (opcjonalnie)
-USE_JINA = True
-JINA_RERANK_THRESHOLD = 0.25
+# (opcjonalnie) Jina rerank – możesz wyłączyć ustawiając USE_JINA=False
+USE_JINA = True  # @param {type:"boolean"}
+JINA_RERANK_THRESHOLD = 0.25  # @param {type:"slider", min:0.15, max:0.75, step:0.01}
 
 # ============================================================
 # KLUCZE API (z Colab Secrets)
