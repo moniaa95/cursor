@@ -19,6 +19,7 @@ import requests
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import normalize
 import hdbscan
 
 from openai import OpenAI
@@ -527,8 +528,11 @@ treatments_list = df_normalized["treatment_normalized"].tolist()
 print(f"Generowanie embeddingów dla {len(treatments_list)} zabiegów...")
 embeddings = embed_texts(treatments_list)
 
-clusterer = hdbscan.HDBSCAN(min_cluster_size=2, min_samples=1, metric="cosine")
-cluster_labels = clusterer.fit_predict(embeddings)
+# Normalizuj embeddingi (dla euclidean = cosine similarity)
+embeddings_normalized = normalize(embeddings, norm='l2')
+
+clusterer = hdbscan.HDBSCAN(min_cluster_size=2, min_samples=1, metric="euclidean")
+cluster_labels = clusterer.fit_predict(embeddings_normalized)
 
 df_normalized["cluster"] = cluster_labels
 print(f"📌 Znaleziono {len(set(cluster_labels)) - (1 if -1 in cluster_labels else 0)} klastrów")
