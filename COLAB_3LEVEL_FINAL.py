@@ -10,8 +10,13 @@ print("📦 Instalacja pakietów...")
 
 # Importy
 import os, re, json, time, math, random, unicodedata
+import warnings
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
+
+# Ukryj ostrzeżenia (m.in. SyntaxWarning z hdbscan)
+warnings.filterwarnings('ignore', category=SyntaxWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
 
 import numpy as np
 import pandas as pd
