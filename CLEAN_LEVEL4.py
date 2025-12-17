@@ -1,19 +1,47 @@
 # ============================================================
 # SKRYPT DO CZYSZCZENIA LEVEL 4
-# Skopiuj i wklej do Colaba jako nową komórkę (po FAZIE 10)
+# 
+# ⚠️ UWAGA: To jest OSOBNY skrypt!
+# 
+# JAK UŻYĆ:
+# 1. Uruchom CAŁY pipeline COLAB_READY_V2.py (FAZA 0-10)
+# 2. Poczekaj aż się zakończy
+# 3. POTEM skopiuj TEN SKRYPT jako NOWĄ komórkę w Colabie
+# 4. Uruchom tę nową komórkę (Shift+Enter)
+# 
+# NIE WKLEJAJ tego do pliku COLAB_READY_V2.py!
+# To ma być osobna komórka uruchomiona PÓŹNIEJ!
 # ============================================================
 
 import pandas as pd
 import re
+import os
 from difflib import SequenceMatcher
 
 print("="*70)
 print("🧹 CZYSZCZENIE LEVEL 4 (usuwanie zbędnych)")
 print("="*70)
 
-# Wczytaj final_tree.csv
-BASE_DIR = "/content/baza_zabiegow_v2"  # lub twoja ścieżka
-df = pd.read_csv(f"{BASE_DIR}/final_tree.csv")
+# Wczytaj final_tree.csv (używa BASE_DIR z głównego kodu)
+# BASE_DIR jest już zdefiniowane wcześniej w kodzie!
+
+# Sprawdź czy plik istnieje
+file_path = f"{BASE_DIR}/final_tree.csv"
+
+if not os.path.exists(file_path):
+    print(f"❌ BŁĄD: Plik nie istnieje: {file_path}")
+    print(f"\n💡 Sprawdź:")
+    print(f"   1. Czy BASE_DIR jest poprawne: {BASE_DIR}")
+    print(f"   2. Czy FAZA 10 się wykonała (plik powinien być zapisany)")
+    print(f"   3. Dostępne pliki w {BASE_DIR}:")
+    if os.path.exists(BASE_DIR):
+        for f in os.listdir(BASE_DIR):
+            print(f"      - {f}")
+    else:
+        print(f"      Katalog {BASE_DIR} nie istnieje!")
+    raise FileNotFoundError(f"Brak pliku: {file_path}")
+
+df = pd.read_csv(file_path)
 
 print(f"\n📊 PRZED czyszczeniem:")
 print(f"   Wszystkich wierszy: {len(df)}")
