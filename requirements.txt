@@ -1,0 +1,29 @@
+# Core dependencies
+openai>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.31.0
+tqdm>=4.65.0
+
+# Web scraping
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# ML/clustering
+scikit-learn>=1.3.0
+scipy>=1.11.0
+hdbscan>=0.8.33
+
+# Optional: for standalone version
+argparse>=1.4.0
+
+# Optional: for production deployment
+fastapi>=0.104.0
+uvicorn>=0.24.0
+streamlit>=1.28.0
+elasticsearch>=8.10.0
+
+# Optional: for data visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.17.0
